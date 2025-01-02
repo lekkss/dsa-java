@@ -3,6 +3,7 @@ public class SinglyLinkedList {
 
     private ListNode head;
 
+    // print a node
     public void print(ListNode head) {
         ListNode curr = head;
         while (curr != null) {
@@ -12,6 +13,7 @@ public class SinglyLinkedList {
         System.out.println("null");
     }
 
+    // get the size of a linked list
     public int size() {
         if (head == null) {
             return 0;
@@ -25,12 +27,14 @@ public class SinglyLinkedList {
         return count;
     }
 
+    // insert at head of a linkedlist
     public void insertFirst(int el) {
         ListNode newNode = new ListNode(el);
         newNode.next = head;
         head = newNode;
     }
 
+    // insert at the tail of a linkedlist
     public void insertLast(int el) {
         ListNode newNode = new ListNode(el);
         if (head == null) {
@@ -44,6 +48,7 @@ public class SinglyLinkedList {
         curr.next = newNode;
     }
 
+    // insert node at a given position
     public void insertPosition(int el, int position) {
         if (position > size()) {
             throw new RuntimeException("Invalid index");
@@ -64,6 +69,7 @@ public class SinglyLinkedList {
         }
     }
 
+    // delete the head of a linkedlist
     public ListNode deleteFirst() {
         if (head == null) {
             return null;
@@ -74,6 +80,7 @@ public class SinglyLinkedList {
         return temp;
     }
 
+    // delete the last node in a linkedlist
     public ListNode deleteLast() {
         if (head == null || head.next == null) {
             return head;
@@ -88,6 +95,7 @@ public class SinglyLinkedList {
         return curr;
     }
 
+    // delete node at a given position
     public ListNode deletePosition(int position) {
         ListNode prev = head;
         if (position == 1) {
@@ -102,6 +110,7 @@ public class SinglyLinkedList {
         return prev;
     }
 
+    // fint a given element in a linkedlist
     public boolean find(int searchKey) {
         ListNode curr = head;
         while (curr.next != null) {
@@ -113,6 +122,7 @@ public class SinglyLinkedList {
         return false;
     }
 
+    // reverse a linkedlist
     public ListNode reverse(ListNode head) {
         if (head == null) {
             return null;
@@ -129,6 +139,7 @@ public class SinglyLinkedList {
         return prev;
     }
 
+    // fint the middle node i a linkedlist
     public ListNode middleNode() {
         if (head == null) {
             return null;
@@ -142,6 +153,7 @@ public class SinglyLinkedList {
         return slwPtr;
     }
 
+    // fint the nth node from the end of a linkedlist
     public ListNode getNthNodeFromEnd(int n) {
         if (head == null) {
             return null;
@@ -160,6 +172,7 @@ public class SinglyLinkedList {
         return mainPtr;
     }
 
+    // remove duplicate node from a ordered linkedlist
     public void removeDuplicated() {
         ListNode curr = head;
         while (curr != null && curr.next != null) {
@@ -171,6 +184,7 @@ public class SinglyLinkedList {
         }
     }
 
+    // insert element into a sorted linkedlist
     public ListNode insertInSortedList(int el) {
         ListNode newNode = new ListNode(el);
         ListNode curr = head;
@@ -187,6 +201,7 @@ public class SinglyLinkedList {
         return head;
     }
 
+    // deletr a given element from a linkedlist
     public void deleteNode(int key) {
         ListNode curr = head;
         ListNode temp = null;
@@ -204,19 +219,79 @@ public class SinglyLinkedList {
         temp.next = curr.next;
     }
 
+    public boolean containsLoop() {
+        if (head == null) {
+            return false;
+        }
+        ListNode fastPtr = head;
+        ListNode slowPtr = head;
+
+        while (fastPtr != null && fastPtr.next != null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+            if (slowPtr == fastPtr) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void createLoopInLinkedList() {
+        ListNode first = new ListNode(1);
+        ListNode second = new ListNode(2);
+        ListNode third = new ListNode(3);
+        ListNode fourth = new ListNode(4);
+        ListNode fifth = new ListNode(5);
+        ListNode sixt = new ListNode(6);
+
+        head = first;
+        first.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+        fifth.next = sixt;
+        sixt.next = third;
+    }
+
+    public ListNode startNodeInALoop() {
+        if (head == null) {
+            return null;
+        }
+        ListNode fastPtr = head;
+        ListNode slowPtr = head;
+
+        while (fastPtr != null && fastPtr.next != null) {
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
+            if (slowPtr == fastPtr) {
+                return getStartingNode(slowPtr);
+            }
+        }
+        return null;
+    }
+
+    public ListNode getStartingNode(ListNode slowPtr) {
+        ListNode temp = head;
+        while (slowPtr != temp) {
+            temp = temp.next;
+            slowPtr = slowPtr.next;
+        }
+        return temp;
+    }
+
     public static void main(String[] args) {
         SinglyLinkedList list = new SinglyLinkedList();
 
-        list.insertFirst(16);
-        list.insertFirst(10);
-        list.insertFirst(8);
-        list.insertFirst(1);
+        // list.insertFirst(16);
+        // list.insertFirst(10);
+        // list.insertFirst(8);
+        // list.insertFirst(1);
 
-        // // list.deleteFirst();
-        // list.deletePosition(1);
+        // // // list.deleteFirst();
+        // // list.deletePosition(1);
 
-        list.print(list.head);
-        System.out.println(list.size());
+        // list.print(list.head);
+        // System.out.println(list.size());
         // System.out.println(list.find(12));
 
         // ListNode rev = list.reverse(list.head);
@@ -228,12 +303,15 @@ public class SinglyLinkedList {
         // ListNode find = list.getNthNodeFromEnd(1);
         // System.out.println(find.data);
 
-        list.insertInSortedList(11);
-        list.print(list.head);
+        // list.insertInSortedList(11);
+        // list.print(list.head);
 
-        list.deleteNode(1);
+        // list.deleteNode(1);
 
         // list.removeDuplicated();
-        list.print(list.head);
+        list.createLoopInLinkedList();
+        // list.print(list.head);
+        // System.out.println(list.containsLoop());
+        System.out.println(list.startNodeInALoop().data);
     }
 }
