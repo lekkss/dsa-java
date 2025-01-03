@@ -7,7 +7,7 @@ public class SinglyLinkedList {
     public void print(ListNode head) {
         ListNode curr = head;
         while (curr != null) {
-            System.out.print(curr.data + " ->");
+            System.out.print(curr.data + " -> ");
             curr = curr.next;
         }
         System.out.println("null");
@@ -301,6 +301,54 @@ public class SinglyLinkedList {
         slowPtr.next = null;
     }
 
+    public static ListNode merge(ListNode a, ListNode b) {
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        while (a != null && b != null) {
+            if (a.data <= b.data) {
+                tail.next = a;
+                a = a.next;
+            } else {
+                tail.next = b;
+                b = b.next;
+            }
+            tail = tail.next;
+        }
+        if (a == null) {
+            tail.next = b;
+        } else {
+            tail.next = a;
+        }
+
+        return dummy.next;
+
+        // ListNode head = null;
+        // ListNode tail = head;
+        // if (a.data <= b.data) {
+        // head = a;
+        // a = a.next;
+        // } else {
+        // head = b;
+        // b = b.next;
+        // }
+        // while (a != null && b != null) {
+        // if (a.data <= b.data) {
+        // tail.next = a;
+        // a = a.next;
+        // } else {
+        // tail.next = b;
+        // b = b.next;
+        // }
+        // }
+        // if (a == null) {
+        // tail.next = b;
+        // } else {
+        // tail.next = b;
+        // }
+
+        // return head;
+    }
+
     public static void main(String[] args) {
         SinglyLinkedList list = new SinglyLinkedList();
 
@@ -331,12 +379,37 @@ public class SinglyLinkedList {
         // list.deleteNode(1);
 
         // list.removeDuplicated();
-        list.createLoopInLinkedList();
-        // list.print(list.head);
-        System.out.println(list.containsLoop());
-        System.out.println(list.startNodeInALoop().data);
-        list.removeLoopInList();
-        System.out.println(list.containsLoop());
+        // list.createLoopInLinkedList();
+        // // list.print(list.head);
+        // System.out.println(list.containsLoop());
+        // System.out.println(list.startNodeInALoop().data);
+        // list.removeLoopInList();
+        // System.out.println(list.containsLoop());
+
+        // merge
+
+        SinglyLinkedList sll1 = new SinglyLinkedList();
+
+        sll1.insertLast(1);
+        sll1.insertLast(4);
+        sll1.insertLast(8);
+
+        SinglyLinkedList sll2 = new SinglyLinkedList();
+
+        sll2.insertLast(3);
+        sll2.insertLast(5);
+        sll2.insertLast(8);
+        sll2.insertLast(9);
+        sll2.insertLast(14);
+        sll2.insertLast(18);
+
+        sll1.print(sll1.head);
+        sll2.print(sll2.head);
+
+        SinglyLinkedList sll3 = new SinglyLinkedList();
+        sll3.head = merge(sll1.head, sll2.head);
+
+        sll3.print(sll3.head);
 
     }
 }
