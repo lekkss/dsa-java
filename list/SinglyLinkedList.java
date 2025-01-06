@@ -1,7 +1,18 @@
+package list;
 
 public class SinglyLinkedList {
 
     private ListNode head;
+
+    public static class ListNode {
+        private int data;
+        private ListNode next;
+
+        public ListNode(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
 
     // print a node
     public void print(ListNode head) {

@@ -1,3 +1,4 @@
+package list;
 public class KadaneAlgorithm {
     public static int maxSubArray(int[] nums) {
         int maxSum = nums[0];
