@@ -2,6 +2,7 @@ package stack;
 
 import java.util.Stack;
 
+// reverse a string using stack
 public interface StringReverse {
     public static String reverse(String str) {
         Stack<Character> stack = new Stack<>();
